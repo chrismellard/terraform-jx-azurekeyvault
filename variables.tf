@@ -1,6 +1,5 @@
 variable "cluster_name" {
   type    = string
-  default = ""
 }
 variable "enabled" {
   type        = string
