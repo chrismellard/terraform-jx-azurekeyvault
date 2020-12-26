@@ -6,7 +6,7 @@ terraform {
   required_version = ">= 0.13.2"
   required_providers {
     azurerm = {
-      version = ">=2.39.0"
+      version = ">=2.41.0"
     }
   }
 }
@@ -15,6 +15,9 @@ terraform {
 // Retrieve active subscription resources are being created in
 // ----------------------------------------------------------------------------
 data "azurerm_subscription" "current" {
+}
+
+data "azurerm_client_config" "current" {
 }
 
 // ----------------------------------------------------------------------------
@@ -48,6 +51,20 @@ resource "azurerm_key_vault_access_policy" "jx" {
 
   secret_permissions = [
     "get",
-    "set"
+    "set",
+    "delete",
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "terraform" {
+  count        = var.enabled ? 1 : 0
+  key_vault_id = azurerm_key_vault.jx.0.id
+  object_id    = data.azurerm_client_config.current.object_id
+  tenant_id    = local.tenant_id
+
+  secret_permissions = [
+    "get",
+    "set",
+    "delete",
   ]
 }

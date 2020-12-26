@@ -1,5 +1,5 @@
 variable "cluster_name" {
-  type    = string
+  type = string
 }
 variable "enabled" {
   type        = string
@@ -28,4 +28,8 @@ variable "key_vault_sku" {
 variable "principal_id" {
   type        = string
   description = "The id of the service principal that should be granted permission on the key vault"
+}
+variable "secret_map" {
+  type        = map(string)
+  description = "Map of secret keys and values to store in Azure Key Vault"
 }
