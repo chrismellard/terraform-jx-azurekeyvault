@@ -12,7 +12,7 @@ variable "location" {
 }
 variable "resource_group_name" {
   type        = string
-  description = "Resouce group to create in which to place key vault"
+  description = "Resource group to create in which to place key vault"
   default     = ""
 }
 variable "key_vault_name" {
